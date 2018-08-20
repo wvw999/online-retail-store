@@ -11,16 +11,15 @@ import { FirebaseListObservable } from 'angularfire2/database';
   styleUrls: ['./album-detail.component.css'],
   providers: [AlbumService]
 })
-export class AlbumDetailComponent implements OnInit  {
+export class AlbumDetailComponent implements OnInit {
+  albumId: string;
+  albumToDisplay;
 
-  albumId: number = null;
-  albumToDisplay: Album;
-
-  constructor(private route: ActivatedRoute, private location: Location, private albumService: AlbumService) {}
+  constructor(private route: ActivatedRoute, private location: Location, private albumService: AlbumService) { }
 
   ngOnInit() {
     this.route.params.forEach((urlParameters) => {
-     this.albumId = parseInt(urlParameters['id']);
+     this.albumId = urlParameters['id'];
    });
    this.albumToDisplay = this.albumService.getAlbumById(this.albumId);
   }
